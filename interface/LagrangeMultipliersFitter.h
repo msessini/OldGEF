@@ -40,7 +40,8 @@ class LagrangeMultipliersFitter{
 
   static TVectorT<double> convertToVector(TMatrixT<double> M);
   static TMatrixT<double> convertToMatrix(TVectorT<double> V);
-
+  static TMatrixTSym<double> ConvertToSymMatrix(TMatrixT<double> in);
+  static bool MatrixHasNan(TMatrixTSym<double> in);
 
    TMatrixT<double> MakeFullMatrix(TMatrixT<double> M11,TMatrixT<double> M12,TMatrixT<double> M21,TMatrixT<double> M22,TMatrixT<double> A,TMatrixT<double> B);
    TMatrixT<double> MakeFullVector(TMatrixT<double> V1,TMatrixT<double> V2,TMatrixT<double> V3);
@@ -73,6 +74,7 @@ class LagrangeMultipliersFitter{
   TMatrixTSym<double> covb_0; //covariance matrix for linearization point (corresponding to par_0) 
   TMatrixTSym<double> covb; // current covariance matrix (corresponding to par) 
 
+  TMatrixT<double> lambda_; // current lagrangian multipliers
 
   bool isconfigured;
   bool isFit;
@@ -110,6 +112,7 @@ class LagrangeMultipliersFitter{
   TMatrixT<double> Fb;
   TMatrixT<double> A;
   TMatrixT<double> B;
+  TMatrixTSym<double> V_f_inv_;
 
 
   TMatrixTSym<double> V_alpha0_inv;
